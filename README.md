@@ -22,8 +22,9 @@ Add the Spring Cloud starter to your project:
 
 ## Usage
 
-First on server side make sure that your exception handling logic will returns VndErrors. You can accomplish 
-that by registering custom `@ExceptionHandler` for your application
+First on server side make sure that your exception handling logic will return VndErrors 
+(this is part of Spring Hateoas project). 
+You can accomplish that by registering custom `@ExceptionHandler` for your application
 
 ```java
 @ExceptionHandler
