@@ -138,7 +138,7 @@ public class VndErrorDecoder implements ErrorDecoder, InitializingBean {
             vndErrors = new VndErrors(vndError);
         }
 
-        return new VndErrorException(vndErrors);
+        return new VndErrorException(response.status(), vndErrors);
     }
 
     /**
