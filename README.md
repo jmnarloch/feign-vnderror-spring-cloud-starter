@@ -17,7 +17,6 @@ Add the Spring Cloud starter to your project:
   <groupId>com.github.jmnarloch</groupId>
   <artifactId>feign-vnderror-spring-cloud-starter</artifactId>
   <version>1.0.0</version>
-  <type>pom</type>
 </dependency>
 ```
 
