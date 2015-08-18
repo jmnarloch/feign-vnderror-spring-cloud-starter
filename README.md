@@ -1,4 +1,4 @@
-# Spring Cloud Netflix Feign vnd.error error decoder
+# Spring Cloud Netflix Feign vnd.error decoder
 
 A custom error decoder for Netflix Feign that will unmarshall [vnd.error](https://github.com/blongden/vnd.error).
 

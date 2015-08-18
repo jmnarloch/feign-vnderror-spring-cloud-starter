@@ -52,7 +52,7 @@ public class VndErrorException extends RuntimeException {
     }
 
     /**
-     * Retrieves the vnd errors
+     * Retrieves the vnd errors.
      *
      * @return the vnd errors
      */

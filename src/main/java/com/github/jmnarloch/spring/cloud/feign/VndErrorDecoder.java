@@ -121,6 +121,7 @@ public class VndErrorDecoder implements ErrorDecoder, InitializingBean {
      * @return the decoded exception
      * @throws IOException if any error occurs during response processing
      */
+    @SuppressWarnings("PMD.EmptyCatchBlock")
     private Exception decodeVndError(Response response) throws IOException {
 
         VndErrors vndErrors = null;
