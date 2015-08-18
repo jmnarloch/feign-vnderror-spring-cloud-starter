@@ -10,6 +10,17 @@ A custom Feign ErrorDecoder capable of handling JSON vnd.error responses.
 
 ## Setup
 
+Add the Spring Cloud starter to your project:
+
+```xml
+<dependency>
+  <groupId>com.github.jmnarloch</groupId>
+  <artifactId>feign-vnderror-spring-cloud-starter</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+```
+
 ## Usage
 
 First on server side make sure that your exception handling logic will returns VndErrors. You can accomplish 
@@ -32,7 +43,8 @@ meaningful identifier that afterwards could be useful during log analysis. Gener
 [HandlerInterceptor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/HandlerInterceptor.html) 
 to populate request scoped identifier on `preHandle()`.
  
-The error decoding happens on content type matching so it is crucial to return `application/vnd.error+json` as the content type.
+The error decoding happens base on content type matching so it is crucial to return `application/vnd.error+json` as 
+response content type.
 
 You use your Feign clients in the same manner as in any other cases, the only difference is that whenever a client call 
 will end with vnd.error you should expect `VndErrorException` instead of `FeignException`.
