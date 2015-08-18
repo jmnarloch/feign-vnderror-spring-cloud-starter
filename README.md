@@ -28,7 +28,7 @@ that by registering custom `@ExceptionHandler` for your application
 
 ```java
 @ExceptionHandler
-ResponseEntity<VndErrors> userNotFoundException(SomeException e) {
+ResponseEntity<VndErrors> someExceptionHandler(SomeException e) {
 
     String logref = UUID.randomUUID();
     
