@@ -24,7 +24,7 @@ Add the Spring Cloud starter to your project:
 
 First on server side make sure that your exception handling logic will return VndErrors 
 (this is part of Spring Hateoas project). 
-You can accomplish that by registering custom `@ExceptionHandler` for your application
+You can accomplish that by registering custom `@ExceptionHandler` in your application
 
 ```java
 @ExceptionHandler
@@ -38,8 +38,8 @@ ResponseEntity<VndErrors> someExceptionHandler(SomeException e) {
 }
 ```
 
-Place them into your `@Controller` or `@ControllerAdvice` annotated beans. You can populate the logref with some 
-meaningful identifier that afterwards could be useful during log analysis. Generally it could be a good idea to add 
+Plac it in your `@Controller` or `@ControllerAdvice` annotated beans. You can populate the logref with some 
+meaningful identifier that afterwards could be used during log analysis. Generally it could be a good idea to add 
 [HandlerInterceptor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/HandlerInterceptor.html) 
 to populate request scoped identifier on `preHandle()`.
  
@@ -61,7 +61,7 @@ try {
 ```
 
 The `VndErrorException` makes very convenient to passthrough exceptions, if you call remote service from a web 
-application you can register `@ExceptionHandler` and return the ordinal vnd.error retrieved from the exception instance. 
+application you can register `@ExceptionHandler` and return the original vnd.error retrieved from the `VndErrorException`. 
 
 ## License
 
