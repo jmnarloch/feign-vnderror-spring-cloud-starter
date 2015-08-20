@@ -35,7 +35,7 @@ uploadArchives {
             }
 
             pom.project {
-                name 'Spring Cloud Netflix Feign vnd.error decoder'
+                name 'feign-vnderror-spring-cloud-starter'
                 packaging 'jar'
                 description 'Spring Cloud Netflix Feign vnd.error decoder'
                 url 'https://github.com/jmnarloch/feign-vnderror-spring-cloud-starter'

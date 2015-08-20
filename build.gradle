@@ -29,7 +29,7 @@ task wrapper(type: Wrapper) {
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Netflix Feign vnd.error error decoder',
+        attributes 'Implementation-Title': 'feign-vnderror-spring-cloud-starter',
                    'Implementation-Version': version
     }
 }
