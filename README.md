@@ -38,7 +38,7 @@ ResponseEntity<VndErrors> someExceptionHandler(SomeException e) {
 }
 ```
 
-Plac it in your `@Controller` or `@ControllerAdvice` annotated beans. You can populate the logref with some 
+Place it in your `@Controller` or `@ControllerAdvice` annotated beans. You can populate the logref with some 
 meaningful identifier that afterwards could be used during log analysis. Generally it could be a good idea to add 
 [HandlerInterceptor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/HandlerInterceptor.html) 
 to populate request scoped identifier on `preHandle()`.
