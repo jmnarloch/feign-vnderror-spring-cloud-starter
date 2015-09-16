@@ -66,7 +66,7 @@ application you can register `@ExceptionHandler` and return the original vnd.err
 ## Properties
 
 ```
-feign.vnderror.enable=true # whether to enable the vnd error decoder, true by default
+feign.vnderror.enabled=true # whether to enable the vnd error decoder, true by default
 ```
 
 ## License

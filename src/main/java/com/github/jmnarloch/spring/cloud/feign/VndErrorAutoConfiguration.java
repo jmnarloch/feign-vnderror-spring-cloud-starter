@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass(Feign.class)
 @ConditionalOnBean(FeignClientsConfiguration.class)
-@ConditionalOnProperty(value = "feign.vnderror.enable", matchIfMissing = true)
+@ConditionalOnProperty(value = "feign.vnderror.enabled", matchIfMissing = true)
 public class VndErrorAutoConfiguration {
 
     /**

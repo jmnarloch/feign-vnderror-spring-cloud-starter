@@ -54,7 +54,7 @@ import static org.springframework.hateoas.VndErrors.VndError;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = VndErrorDisableTest.Application.class)
 @WebAppConfiguration
-@IntegrationTest({"server.port=0", "feign.vnderror.enable=false"})
+@IntegrationTest({"server.port=0", "feign.vnderror.enabled=false"})
 @DirtiesContext
 public class VndErrorDisableTest {
 
