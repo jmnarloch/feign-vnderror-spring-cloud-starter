@@ -63,6 +63,12 @@ try {
 The `VndErrorException` makes very convenient to passthrough exceptions, if you call remote service from a web 
 application you can register `@ExceptionHandler` and return the original vnd.error retrieved from the `VndErrorException`. 
 
+## Properties
+
+```
+feign.vnderror.enable=true # whether to enable the vnd error decoder, true by default
+```
+
 ## License
 
 Apache 2.0
