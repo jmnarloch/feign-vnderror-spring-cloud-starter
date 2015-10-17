@@ -17,11 +17,9 @@ package com.github.jmnarloch.spring.cloud.feign;
 
 import feign.Feign;
 import feign.codec.ErrorDecoder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.netflix.feign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,7 +32,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass(Feign.class)
-@ConditionalOnBean(FeignClientsConfiguration.class)
 @ConditionalOnProperty(value = "feign.vnderror.enabled", matchIfMissing = true)
 public class VndErrorAutoConfiguration {
 
@@ -44,7 +41,7 @@ public class VndErrorAutoConfiguration {
      * @return the error decoder
      */
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(ErrorDecoder.class)
     public ErrorDecoder vndErrorDecoder() {
         return new VndErrorDecoder();
     }

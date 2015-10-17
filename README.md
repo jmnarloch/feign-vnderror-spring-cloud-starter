@@ -16,7 +16,7 @@ Add the Spring Cloud starter to your project:
 <dependency>
   <groupId>com.github.jmnarloch</groupId>
   <artifactId>feign-vnderror-spring-cloud-starter</artifactId>
-  <version>1.1.1</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 
@@ -68,6 +68,12 @@ application you can register `@ExceptionHandler` and return the original vnd.err
 ```
 feign.vnderror.enabled=true # whether to enable the vnd error decoder, true by default
 ```
+## Migration to 1.2.x
+
+The VndErrorException has been reworked to include extra request information like http status, http headers and
+response body, replacing the existing exception constructors.
+
+Also effort has been made to include the exception type directly in Spring HATEOAS.
 
 ## License
 
