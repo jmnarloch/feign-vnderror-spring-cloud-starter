@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2015 the original author or authors
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,10 +28,16 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.hateoas.VndErrors.VndError;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * A a custom error decoder capable of instantiating {@link VndErrorException}. The decoder will try to match any
@@ -93,7 +99,6 @@ public class VndErrorDecoder implements ErrorDecoder, InitializingBean {
 
         try {
             if (hasVndError(response)) {
-
                 return decodeVndError(response);
             }
 
@@ -138,7 +143,7 @@ public class VndErrorDecoder implements ErrorDecoder, InitializingBean {
             vndErrors = new VndErrors(vndError);
         }
 
-        return new VndErrorException(response.status(), vndErrors);
+        return createException(response, body, vndErrors);
     }
 
     /**
@@ -179,5 +184,44 @@ public class VndErrorDecoder implements ErrorDecoder, InitializingBean {
             }
         }
         return false;
+    }
+
+    /**
+     * Creates the instance of {@link VndErrorException}.
+     *
+     * @param response  the response
+     * @param body      the response body
+     * @param vndErrors the vnd errors  @return the exception instance
+     */
+    private VndErrorException createException(Response response, byte[] body, VndErrors vndErrors) {
+
+        final HttpStatus status = HttpStatus.valueOf(response.status());
+        final HttpHeaders headers = mapHeaders(response.headers());
+        final Charset charset = getCharset(headers);
+        return new VndErrorException(status, status.getReasonPhrase(), headers, body, charset, vndErrors);
+    }
+
+    /**
+     * Maps the response headers map to {@link HttpHeaders}.
+     *
+     * @param responseHeaders the response headers
+     * @return the http headers
+     */
+    private HttpHeaders mapHeaders(Map<String, Collection<String>> responseHeaders) {
+        final HttpHeaders headers = new HttpHeaders();
+        for (Map.Entry<String, Collection<String>> header : responseHeaders.entrySet()) {
+            headers.put(header.getKey(), new ArrayList<>(header.getValue()));
+        }
+        return headers;
+    }
+
+    /**
+     * Retrieves the response charset.
+     * @param headers the http headers
+     * @return the response charset
+     */
+    private Charset getCharset(HttpHeaders headers) {
+        final MediaType contentType = headers.getContentType();
+        return contentType != null ? contentType.getCharSet() : null;
     }
 }

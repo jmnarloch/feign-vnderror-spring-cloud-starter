@@ -16,6 +16,11 @@
 package com.github.jmnarloch.spring.cloud.feign;
 
 import org.springframework.hateoas.VndErrors;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpStatusCodeException;
+
+import java.nio.charset.Charset;
 
 /**
  * The base exception that will be used to propagate any vnd.errors during Feign client invocations.
@@ -24,50 +29,65 @@ import org.springframework.hateoas.VndErrors;
  * @see VndErrorDecoder
  * @see VndErrors
  */
-public class VndErrorException extends RuntimeException {
+public class VndErrorException extends HttpStatusCodeException {
 
     /**
-     * The response http status.
-     */
-    private int status;
-
-    /**
-     * The vnd error.
+     * The vnd errors.
      */
     private final VndErrors vndErrors;
 
     /**
-     * Creates new instance of {@link VndErrorException} with the response status and the {@link VndErrors} details.
+     * Creates new instance of {@link VndErrorException} with status code and vnd errors.
      *
-     * @param status the http status
-     * @param vndErrors the errors details
+     * @param statusCode      the status code
+     * @param vndErrors       the vnd errors
      */
-    public VndErrorException(int status, VndErrors vndErrors) {
-        this.status = status;
+    public VndErrorException(HttpStatus statusCode, VndErrors vndErrors) {
+        super(statusCode);
         this.vndErrors = vndErrors;
     }
 
     /**
-     * Creates new instance of {@link VndErrorException} with the detailed error message, response status and
-     * {@link VndErrors} details.
+     * Creates new instance of {@link VndErrorException} with status code and vnd errors.
      *
-     * @param message   the detailed error message
-     * @param status the http status
-     * @param vndErrors the error details
+     * @param statusCode      the status code
+     * @param statusText      the status text
+     * @param vndErrors       the vnd errors
      */
-    public VndErrorException(String message, int status, VndErrors vndErrors) {
-        super(message);
-        this.status = status;
+    public VndErrorException(HttpStatus statusCode, String statusText, VndErrors vndErrors) {
+        super(statusCode, statusText);
         this.vndErrors = vndErrors;
     }
 
     /**
-     * Retrieves the response http status.
+     * Creates new instance of {@link VndErrorException} with status code, response body and vnd errors.
      *
-     * @return the response http status
+     * @param statusCode      the status code
+     * @param statusText      the status text
+     * @param responseBody    the response body
+     * @param responseCharset the response charset
+     * @param vndErrors       the vnd errors
      */
-    public int getStatus() {
-        return status;
+    public VndErrorException(HttpStatus statusCode, String statusText, byte[] responseBody, Charset responseCharset,
+                             VndErrors vndErrors) {
+        super(statusCode, statusText, responseBody, responseCharset);
+        this.vndErrors = vndErrors;
+    }
+
+    /**
+     * Creates new instance of {@link VndErrorException} with status code, http headers, response body and vnd errors.
+     *
+     * @param statusCode      the status code
+     * @param statusText      the status text
+     * @param responseHeaders the response headers
+     * @param responseBody    the response body
+     * @param responseCharset the response charset
+     * @param vndErrors       the vnd errors
+     */
+    public VndErrorException(HttpStatus statusCode, String statusText, HttpHeaders responseHeaders, byte[] responseBody,
+                             Charset responseCharset, VndErrors vndErrors) {
+        super(statusCode, statusText, responseHeaders, responseBody, responseCharset);
+        this.vndErrors = vndErrors;
     }
 
     /**
