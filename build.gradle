@@ -41,8 +41,11 @@ jar {
 }
 
 repositories {
-    mavenCentral()
     jcenter()
+}
+
+compileJava {
+    options.fork = true
 }
 
 dependencies {
