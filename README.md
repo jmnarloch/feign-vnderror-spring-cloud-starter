@@ -3,6 +3,7 @@
 > A custom error decoder for Netflix Feign that will unmarshall [vnd.error](https://github.com/blongden/vnd.error).
 
 [![Build Status](https://travis-ci.org/jmnarloch/feign-vnderror-spring-cloud-starter.svg?branch=master)](https://travis-ci.org/jmnarloch/feign-vnderror-spring-cloud-starter)
+[![Coverage Status](https://coveralls.io/repos/jmnarloch/feign-vnderror-spring-cloud-starter/badge.svg?branch=master&service=github)](https://coveralls.io/github/jmnarloch/feign-vnderror-spring-cloud-starter?branch=master)
 
 ## Features
 
